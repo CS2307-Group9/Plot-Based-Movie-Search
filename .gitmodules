@@ -1,0 +1,3 @@
+[submodule "Datasets/MovieBench"]
+	path = Datasets/MovieBench
+	url = https://github.com/showlab/MovieBench
