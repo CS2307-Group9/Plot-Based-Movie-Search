@@ -49,7 +49,7 @@ class Ranked2Relevance:
 if __name__ == "__main__":
 
     output_json_path = "Output/BM25.json"
-    K = 5
+    K = 25
     R = 1
 
     with open(output_json_path, 'r') as f:
@@ -74,5 +74,31 @@ if __name__ == "__main__":
 
         m_ndcg = MeanEvaluation.compute(relevances_set, K, R, Metric.NDCG)
         print(f"Mean-NDCG@{K}", m_ndcg)
+
+    import numpy as np
+    keys = [
+        "0.0",
+        "0.1111111111111111",
+        "0.2222222222222222",
+        "0.3333333333333333",
+        "0.4444444444444444",
+        "0.5555555555555556",
+        "0.6666666666666666",
+        "0.7777777777777777",
+        "0.8888888888888888",
+        "1.0"
+    ]
+
+    output = {
+        "P": {str(k): m_p for k in keys},
+        "R": {str(k): m_r for k in keys},
+        "AP": {str(k): m_ap for k in keys},
+        "RP": {str(k): m_rp for k in keys},
+        "RR": {str(k): m_rr for k in keys},
+        "NDCG": {str(k): m_ndcg for k in keys},
+    }
+    
+    with open("Output\\eval5000_25_BM25.json", "w") as f:
+        json.dump(output, f, indent=4)
 
     pass
